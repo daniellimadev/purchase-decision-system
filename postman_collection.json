@@ -1,0 +1,140 @@
+{
+  "info": {
+    "name": "Purchase Decision System",
+    "description": "API to manage purchase decisions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": ["{{base_url}}"],
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "Get Metrics",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/metrics",
+          "host": ["{{base_url}}"],
+          "path": ["metrics"]
+        }
+      }
+    },
+    {
+      "name": "List Pending Purchases",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/purchases?status=pending&limit=20&offset=0",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "purchases"],
+          "query": [
+            {"key": "status", "value": "pending"},
+            {"key": "limit", "value": "20"},
+            {"key": "offset", "value": "0"}
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Purchase by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/purchases/{{purchase_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "purchases", "{{purchase_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Approve Purchase",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reason\": \"Valid purchase within standards\",\n  \"approved_by\": \"admin@example.com\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/purchases/{{purchase_id}}/approve",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "purchases", "{{purchase_id}}", "approve"]
+        }
+      }
+    },
+    {
+      "name": "Reject Purchase",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reason\": \"Suspicious amount detected\",\n  \"rejected_by\": \"fraud@example.com\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/purchases/{{purchase_id}}/reject",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "purchases", "{{purchase_id}}", "reject"]
+        }
+      }
+    },
+    {
+      "name": "Ignore Purchase",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reason\": \"Duplicate purchase\",\n  \"ignored_by\": \"system@example.com\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/purchases/{{purchase_id}}/ignore",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "purchases", "{{purchase_id}}", "ignore"]
+        }
+      }
+    },
+    {
+      "name": "Get Purchase History",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/purchases/{{purchase_id}}/history",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "purchases", "{{purchase_id}}", "history"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "purchase_id",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
