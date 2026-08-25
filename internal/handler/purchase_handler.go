@@ -6,15 +6,15 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/purchase-decision-system/internal/domain"
-	"github.com/purchase-decision-system/internal/services"
+	"github.com/purchase-decision-system/internal/service"
 	log "github.com/sirupsen/logrus"
 )
 
 type PurchaseHandler struct {
-	service *services.PurchaseService
+	service *service.PurchaseService
 }
 
-func NewPurchaseHandler(service *services.PurchaseService) *PurchaseHandler {
+func NewPurchaseHandler(service *service.PurchaseService) *PurchaseHandler {
 	return &PurchaseHandler{service: service}
 }
 
